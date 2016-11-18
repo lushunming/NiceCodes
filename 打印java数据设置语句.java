@@ -1,14 +1,27 @@
 /**
-	 * ½«Êı¾İ×ªÒÆµÄÓï¾ä
+	 * å°†æ•°æ®è½¬ç§»çš„è¯­å¥
 	 * 
-	 * @param firstName µÚÒ»Ãû³Æ
-	 * @param secondName µÚ¶ş¸öÃû³Æ
-	 * @param clazzName À×Ãû
+	 * @param firstName ç¬¬ä¸€åç§°
+	 * @param secondName ç¬¬äºŒä¸ªåç§°
+	 * @param clazzName é›·å
 	 */
 	private static void transferData(String firstName, String secondName, Class clazzName) {
 		Field[] fields = clazzName.getDeclaredFields();
+		int a = 0;
 		for (Field field : fields) {
 			String fieldText = field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1);
+			if (field.getType().equals(Integer.class)) {
+				System.out.println("if(null==" + firstName + ".get" + fieldText + "()" + "){");
+				System.out.println(firstName + ".set" + fieldText + "(0);");
+				System.out.println("}");
+			}
+			if (field.getType().equals(Double.class)) {
+				System.out.println("if(null==" + firstName + ".get" + fieldText + "()" + "){");
+				System.out.println(firstName + ".set" + fieldText + "(0d);");
+				System.out.println("}");
+			}
 			System.out.println(firstName + ".set" + fieldText + "(" + secondName + ".get" + fieldText + "());");
+			a++;
 		}
+		System.out.println("a=" + a);
 	}
