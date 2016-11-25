@@ -1,9 +1,12 @@
 /**
 	 * 将数据转移的语句
 	 * 
-	 * @param firstName 第一名称
-	 * @param secondName 第二个名称
-	 * @param clazzName 雷名
+	 * @param firstName
+	 *            第一名称
+	 * @param secondName
+	 *            第二个名称
+	 * @param clazzName
+	 *            类名
 	 */
 	private static void transferData(String firstName, String secondName, Class clazzName) {
 		Field[] fields = clazzName.getDeclaredFields();
@@ -14,13 +17,26 @@
 				System.out.println("if(null==" + firstName + ".get" + fieldText + "()" + "){");
 				System.out.println(firstName + ".set" + fieldText + "(0);");
 				System.out.println("}");
-			}
-			if (field.getType().equals(Double.class)) {
+				System.out.println("else{");
+				System.out.println(firstName + ".set" + fieldText + "(" + secondName + ".get" + fieldText + "());");
+				System.out.println("}");
+			} else if (field.getType().equals(Double.class)) {
 				System.out.println("if(null==" + firstName + ".get" + fieldText + "()" + "){");
 				System.out.println(firstName + ".set" + fieldText + "(0d);");
 				System.out.println("}");
+				System.out.println("else{");
+				System.out.println(firstName + ".set" + fieldText + "(" + secondName + ".get" + fieldText + "());");
+				System.out.println("}");
+			} else if (field.getType().equals(Float.class)) {
+				System.out.println("if(null==" + firstName + ".get" + fieldText + "()" + "){");
+				System.out.println(firstName + ".set" + fieldText + "(0f);");
+				System.out.println("}");
+				System.out.println("else{");
+				System.out.println(firstName + ".set" + fieldText + "(" + secondName + ".get" + fieldText + "());");
+				System.out.println("}");
+			} else {
+				System.out.println(firstName + ".set" + fieldText + "(" + secondName + ".get" + fieldText + "());");
 			}
-			System.out.println(firstName + ".set" + fieldText + "(" + secondName + ".get" + fieldText + "());");
 			a++;
 		}
 		System.out.println("a=" + a);
