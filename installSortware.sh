@@ -43,3 +43,5 @@ git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 chsh -s /bin/zsh
 
 apt-get install maven
+#设置Ubuntu的关闭按钮在右边
+gsettings set org.gnome.desktop.wm.preferences button-layout ':minimize,maximize,close'
