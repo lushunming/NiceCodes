@@ -1,6 +1,6 @@
 /**
 	 * 将数据转移的语句
-	 * 
+	 *
 	 * @param firstName
 	 *            第一名称
 	 * @param secondName
@@ -8,8 +8,25 @@
 	 * @param clazzName
 	 *            类名
 	 */
+
 	private static void transferData(String firstName, String secondName, Class clazzName) {
+		if (clazzName.equals(Object.class)) {
+			return;
+		}
 		Field[] fields = clazzName.getDeclaredFields();
+		printFiled(firstName, secondName, fields);
+		transferData(firstName, secondName, clazzName.getSuperclass());
+
+	}
+
+	/**
+	 * 打印数据
+	 * 
+	 * @param firstName
+	 * @param secondName
+	 * @param fields
+	 */
+	private static void printFiled(String firstName, String secondName, Field[] fields) {
 		int a = 0;
 		for (Field field : fields) {
 			String fieldText = field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1);
