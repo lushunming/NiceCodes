@@ -61,3 +61,29 @@
 	public static void main(String[] args) {
 		transferData("carViolationData", "carViolationDataDto", CarViolationData.class);
 	}
+
+ /**
+     * 打印数据
+     *
+     * @param firstName
+     * @param secondName
+     * @param fields
+     */
+    private static void printCheck(String firstName, Field[] fields) {
+        int a = 0;
+        for (Field field : fields) {
+            String fieldText = field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1);
+            if (field.getType().equals(String.class)) {
+
+                System.out.println("if(StringUtil.isNullOrBlank(" + firstName + ".get" + fieldText + "())){");
+                System.out.println("throw new RuntimeException(\"\");");
+                System.out.println("}");
+            } else {
+                System.out.println("if(null==" + firstName + ".get" + fieldText + "()){");
+                System.out.println("throw new RuntimeException(\"\");");
+                System.out.println("}");
+            }
+            a++;
+        }
+        System.out.println("a=" + a);
+    }
